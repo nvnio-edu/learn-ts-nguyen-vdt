@@ -1,7 +1,6 @@
 name: Autograding Tests
 'on':
 - push
-- workflow_dispatch
 - repository_dispatch
 permissions:
   checks: write
@@ -14,17 +13,17 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: hello
-      id: hello
-      uses: education/autograding-command-grader@v1
+    - name: node
+      id: node
+      uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: hello
+        test-name: node
         setup-command: npm install
         command: npm test
         timeout: 10
     - name: Autograding Reporter
-      uses: education/autograding-grading-reporter@v1
+      uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        HELLO_RESULTS: "${{steps.hello.outputs.result}}"
+        NODE_RESULTS: "${{steps.node.outputs.result}}"
       with:
-        runners: hello
+        runners: node
