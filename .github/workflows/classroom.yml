@@ -22,9 +22,19 @@ jobs:
         command: npm test tests/ex1.spec.ts
         timeout: 10
         max-score: 10
+    - name: ex2
+      id: ex2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: ex2
+        setup-command: npm install
+        command: npm test tests/ex2.spec.ts
+        timeout: 10
+        max-score: 10
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
         EX1_RESULTS: "${{steps.ex1.outputs.result}}"
+        EX2_RESULTS: "${{steps.ex2.outputs.result}}"
       with:
-        runners: ex1
+        runners: ex1,ex2
