@@ -13,17 +13,18 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: node
-      id: node
+    - name: ex1
+      id: ex1
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: node
+        test-name: ex1
         setup-command: npm install
-        command: npm test
+        command: npm test tests/ex1.spec.ts
         timeout: 10
+        max-score: 10
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        NODE_RESULTS: "${{steps.node.outputs.result}}"
+        EX1_RESULTS: "${{steps.ex1.outputs.result}}"
       with:
-        runners: node
+        runners: ex1
